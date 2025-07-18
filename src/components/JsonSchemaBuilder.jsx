@@ -110,11 +110,7 @@ const JsonSchemaBuilder = () => {
                   type="primary"
                   icon={<SendOutlined />}
                   htmlType="submit"
-                  style={{ 
-                    marginTop: '8px',
-                    background: '#52c41a',
-                    borderColor: '#52c41a'
-                  }}
+                  style={{ marginTop: '8px' }}
                   disabled={watchedFields.length === 0}
                 >
                   Submit
