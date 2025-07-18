@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Row, Col, Card, Button, Typography, Space } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined, SendOutlined } from '@ant-design/icons';
 import FieldBuilder from './FieldBuilder';
 import JsonPreview from './JsonPreview';
 
 const { Title } = Typography;
 
 const JsonSchemaBuilder = () => {
-  const { control, watch, handleSubmit, setValue, getValues } = useForm({
+  const { control, watch, handleSubmit, setValue, getValues, reset } = useForm({
     defaultValues: {
       fields: []
     }
@@ -61,6 +61,20 @@ const JsonSchemaBuilder = () => {
   };
 
   const onSubmit = (data) => {
+    // Show alert with success message
+    alert('Data submitted successfully!');
+    
+    // Reset form to initial state
+    reset({
+      fields: []
+    });
+    
+    // Clear JSON schema
+    setJsonSchema({});
+    
+    // Reset update trigger
+    setUpdateTrigger(0);
+    
     console.log('Form Data:', data);
     console.log('Generated Schema:', jsonSchema);
   };
@@ -92,10 +106,16 @@ const JsonSchemaBuilder = () => {
                 >
                   Add Field
                 </Button>
-                <Button 
-                  type="default" 
+                <Button
+                  type="primary"
+                  icon={<SendOutlined />}
                   htmlType="submit"
-                  style={{ marginTop: '8px' }}
+                  style={{ 
+                    marginTop: '8px',
+                    background: '#52c41a',
+                    borderColor: '#52c41a'
+                  }}
+                  disabled={watchedFields.length === 0}
                 >
                   Submit
                 </Button>
